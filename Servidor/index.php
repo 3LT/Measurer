@@ -15,19 +15,7 @@
   </head>
 
   <body>
-    <!-- CABEÇALHO --> 
-    <header class="cabecalho container">
-      <a href="index.php"></a>
-      <img src="img/logo-mobile.png">
-      <!-- Menu --> 
-      <div class="menu">
-        <ul>
-         <!-- <li><a href="#">Custos</a></li>
-         <li><a href="#">Sustentabilidade</a></li>
-         <li><a href="#">Sobre</a></li>u --> 
-        </ul>
-      </div>
-    </header>
+   
    <!-- BANNER --> 
     <div class="banner container">
       <div class="title">

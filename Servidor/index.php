@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="refresh" content="30">
     <meta name="author" content="3LT">
-    <meta name="description" content="Prjeto de TCC.">
+    <meta name="description" content="Projeto de TCC.">
     <title>Smart Measurer</title>
     <link rel="stylesheet" href="estilo.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -15,7 +15,6 @@
   </head>
 
   <body>
-   
    <!-- BANNER --> 
     <div class="banner container">
       <div class="title">
@@ -32,7 +31,8 @@
     <div class="servicos"> 
       <article class="inner servico radius"> 
         <!-- GRÁFICO --> 
-        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <!-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> -->
+        <script type="text/javascript" src="loader.js"></script>
         <script type="text/javascript">
           google.charts.load('current', {'packages':['corechart']});
 
@@ -51,7 +51,7 @@
               $usuario='root';
               $senha='';
               $link = mysqli_connect($servidor,$usuario,$senha, $banco);
-              $yday = date('Y-m-d h:i:s', strtotime("-1 day"));
+              $yday = date('d-m-Y h:i:s', strtotime("-1 day"));
               $query = "SELECT * FROM medidas WHERE horario > '$yday'";
               $result = mysqli_query($link,$query);
               $row = mysqli_fetch_array($result);
@@ -77,7 +77,7 @@
         ]);
 
         
-        var options = {'title':'Horário',
+        var options = {'title':'',
                        'width': '60%',
                        'height':'450'};
         var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
@@ -87,26 +87,25 @@
             <?php
               ini_set('display_errors', 'On');
               $link = mysqli_connect($servidor,$usuario,$senha, $banco);
-              $yday = date('Y-m-d h:i:s', strtotime ("-1 day"));
+              $yday = date('d-m-Y h:i:s', strtotime ("-1 day"));
               $query = "SELECT * FROM medidas WHERE horario > '$yday'";
               $result = mysqli_query($link,$query); 
-              $sql = "SELECT SUM(vazao) AS total FROM medidas";
+              $sql = "SELECT FORMAT(SUM(vazao),2) AS total FROM medidas";
               $qry = mysqli_query($link, $sql);
               $row = mysqli_fetch_assoc($qry);
             ?>
             <h4> O consumo total de água é:
-              <strong><?php echo $row['total']; ?> Litros </strong> ou 
-              <strong><?php echo $row['total']; ?> L/min</strong>. <br>
+              <strong><?php echo $row['total']; ?> Litros </strong>
               <div id="chart_div"></div> </h4>
             <?php
               ini_set('display_errors', 'On');
               $link = mysqli_connect($servidor,$usuario,$senha, $banco);
-              $sql = "SELECT SUM(energia) AS total FROM medidas";
+              $sql = "SELECT FORMAT(SUM(energia),2) AS total FROM medidas";
               $qry = mysqli_query($link,$sql);
               $row = mysqli_fetch_assoc($qry);
             ?>
             <h4> O consumo total de energia é:
-              <strong><?php echo $row['total']; ?> Kw/h</strong>.
+              <strong><?php echo $row['total']; ?> W</strong>.
               <div id="chart_div"></div> </h4>
 
       </article>

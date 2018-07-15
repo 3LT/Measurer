@@ -9,25 +9,21 @@
 	// Conectando e consutando o banco de dados.
 	$link = mysqli_connect($servidor,$usuario,$senha, $banco);
 	date_default_timezone_set('America/Sao_Paulo');
-	$horario = date('Y-m-d H:i:s', time());
+	$horario = date('d-m-Y H:i:s', time());
 	// Base de dados
-	if (isset($_GET['vazao']) or isset($_GET['energia']) or isset($_GET['money_agua']) or isset($_GET['money_energia'])) {
+	if (isset($_GET['vazao']) or isset($_GET['energia'])) {
 		// Preparando os dados que vamos enviar.
 		$vazao = $_GET['vazao'];
 		$energia = $_GET['energia'];
-		$money_agua = $_GET['money_agua'];
-		$money_energia = $_GET['money_energia'];
 		// Gravando os dados no banco.
-		$query = "INSERT INTO medidas(horario, vazao, energia, money_agua, money_energia) VALUES ('$horario','$vazao','$energia','$money_agua', '$money_energia')";
+		$query = "INSERT INTO medidas(horario, vazao, energia) VALUES ('$horario','$vazao','$energia')";
 	
 		mysqli_query($link,$query);
 		mysqli_close($link);
 		// Mensagem que aparecerá no navegador.
 		echo 'DADOS INSERIDOS NO BANCO!';
-
 	}else{	
 		// Caso houver erros a mensagem abaixo aparecerá no navegador.
 		echo 'ERRO AO GRAVAR NO BANCO DE DADOS!';
 	}	
-	// Uma URL tem um seguinte formato:http: //localhost/medida.php?vazao=10&energia=100
 ?>
